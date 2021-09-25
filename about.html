@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>S.Cheema</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css?v=2">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="topPanel">
+        <h1> 
+            <nav>
+                <a href="index.html">S.Cheema</a>
+
+                  <div class="nav-links">
+                      <ul>
+                          <li><a href="index.html">HOME</a></li>
+                          <li><a href="about.html">ABOUT ME</a></li>
+                          <li><a href="bookshelf.html">BOOKSHELF</a></li>
+                          <li><a href="contact.html">CONTACT</a></li>
+                      </ul>
+                  </div>
+                </a>
+            </nav>
+        </h1>
+    </div>
+    <div>
+         <table style="width:100%">
+            <tr>
+                <td style="background-color: #fcde67"><b>Passionate About Traveling</b></td>
+            </tr>
+         </table>
+    </div>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 10</div>
+          <img src="images/travel/StanfordUniversityCA.jpg">
+          <div class="text">Stanford University, CA</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 10</div>
+          <img src="images/travel/OracleParkSanFranciscoCA.jpg">
+          <div class="text">Oracle Park, San Francisco, CA</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">3 / 10</div>
+          <img src="images/travel/BoeingFactoryRentonWA.jpg">
+          <div class="text">Boeing Factory, Renton, WA</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">4 / 10</div>
+          <img src="images/travel/SeattleWA.jpg">
+          <div class="text">Seattle, WA</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">5 / 10</div>
+          <img src="images/travel/YellowstoneWY.jpg">
+          <div class="text">Yellowstone, WY</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">6 / 10</div>
+          <img src="images/travel/BellagioLasVegasNV.jpg">
+          <div class="text">Bellagio, Las Vegas, NV</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">7 / 10</div>
+          <img src="images/travel/UniversityOfTexasAtAustinTX.jpg">
+          <div class="text">University Of Texas At Austin, TX</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">8 / 10</div>
+          <img src="images/travel/SpaceCenterHoustonTX.jpg">
+          <div class="text">Space Center, Houston, TX</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">9 / 10</div>
+          <img src="images/travel/DallasTX.jpg">
+          <div class="text">Dallas, TX</div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="numbertext">10 / 10</div>
+          <img src="images/travel/NintendoStoreNewYorkNY.jpg">
+          <div class="text">Nintendo Store NewYork, NY</div>
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span>
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span>
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span>
+      <span class="dot"></span>  
+    </div>
+
+    <div>
+         <table>
+            <tr>
+
+                <td style="background-color: #fcde67;width:70%">
+                    <b>Education</b>
+                </td>
+                <td style="background-color: #fcde67;width:15%">
+                    <b>YEAR</b>
+                </td>
+                <td style="background-color: #fcde67;width:15%">
+                </td>
+
+            </tr>
+            <tr style="text-align:left;">
+                <th>
+                    <b>University of Calgary</b><br>Bachelor of Science, Software Engineering and Geophysics<br>
+                </th>
+                <th style="text-align:center">
+                    <b>Sept 2014 - Aug 2021</b><br></br>
+                </th>
+                <th>
+                    <img src="images/UOFC.png">
+                </th>
+            </tr>
+            <tr >
+                <th style="text-align:left;">
+                    <b>AI-900:</b>Microsoft Azure AI Fundamentals
+                </th>
+                <th style="text-align:center;">
+                    <b>Sept 2021</b><br></br>
+                </th>
+                <th>
+                    <img src="images/MA.png">
+                </th>
+            </tr>
+         </table>
+    </div>
+
+    <table class="footTable">
+        <tr>
+          <td style="background-color:#fffff3;width:100%">
+            <nav>
+                <a href="https://github.com/sucheema">
+                    <img src="images/gitHub.png">
+                </a>
+            </nav>
+          </td>
+        </tr>
+    </table>
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+    
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+          setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script>
+
+
+</body>
+</html>
