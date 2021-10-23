@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>S.Cheema</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css?v=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="sidebar">
+        <nav>
+            <div class="sidebarlink">
+                <br>
+                <ul>
+                    <li><a href="projects.html">Gallery</a></li>
+                    <li><a href="projectsprograms.html">Programs</a></li>
+                    <li><a href="projectsdatamodels.html">Data Models</a></li>
+                    <li><a href="projectsdesigns.html">Designs</a></li>
+                    <li><a href="projectsvirtualreality.html">Virtual Reality</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="topPanel">
+        <div style="margin-top: 10px;margin-bottom: 10px;margin-left: 50px">
+            <a href="index.html">S. Cheema</a>
+            </div>
+                <h1> 
+                    <nav>
+                          <div class="nav-links" style="padding-right:5px;">
+                              <ul>
+                                  <li><a href="index.html">Home</a></li>
+                                  <li><a href="about.html">About</a></li>
+                                  <li><a href="projects.html">Portfolio</a></li>
+                                  <li><a href="bookshelf.html">Bookshelf</a></li>
+                                  <li><a href="contact.html">Contact</a></li>
+                              </ul>
+                          </div>
+                        </a>
+                    </nav>
+                </h1>
+            </div>
+            <br>
+
+            <div style="padding-left: 5px;padding-right: 50px; padding-left: 300px;">
+                 <table style="width:100%; text-align: center;">
+                    <tr>
+                        <td style="background-color: #fcde67"><b>Design and 3D Modeling</b></td>
+                    </tr>
+                 </table>
+            </div>
+    </div>
+    <br>
+
+    <div class="slideshow-projectgallery">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 2</div>
+            <img src="images/project/pr22-d5.jpg">
+            <div class="text">Pump Support - PR22-D5, Autodesk Fusion 360</div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="portfolioheader">
+     <table>
+        <tr>
+            <td><b>Models</b></td>
+        </tr>
+     </table>
+    </div>
+
+
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+         
+          setTimeout(showSlides, 3000); // Change image every 2 seconds
+        }
+    </script>
+
+</body>
+</html>

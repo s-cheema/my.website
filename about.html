@@ -14,29 +14,34 @@
 <body>
 
     <div class="topPanel">
+        <div style="margin-top: 10px;margin-bottom: 10px;margin-left: 50px">
+            <a href="index.html">S. Cheema</a>
+        </div>
         <h1> 
             <nav>
-                <a href="index.html">S.Cheema</a>
-
-                  <div class="nav-links">
+                  <div class="nav-links" style="padding-right:5px;">
                       <ul>
-                          <li><a href="index.html">HOME</a></li>
-                          <li><a href="about.html">ABOUT ME</a></li>
-                          <li><a href="bookshelf.html">BOOKSHELF</a></li>
-                          <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Portfolio</a></li>
+                        <li><a href="bookshelf.html">Bookshelf</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                       </ul>
                   </div>
                 </a>
             </nav>
         </h1>
     </div>
-    <div>
+    <br>
+
+    <div style="padding-left: 5px;padding-right: 5px">
          <table style="width:100%">
             <tr>
                 <td style="background-color: #fcde67"><b>Passionate About Traveling</b></td>
             </tr>
          </table>
     </div>
+
     <div class="slideshow-container">
         <div class="mySlides fade">
           <div class="numbertext">1 / 10</div>
@@ -97,24 +102,11 @@
           <img src="images/travel/NintendoStoreNewYorkNY.jpg">
           <div class="text">Nintendo Store NewYork, NY</div>
         </div>
-
     </div>
     <br>
+    <br>
 
-    <div style="text-align:center">
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-      <span class="dot"></span>
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-      <span class="dot"></span>
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-      <span class="dot"></span>
-      <span class="dot"></span>  
-    </div>
-
-    <div>
+    <div style="padding-left: 5px;padding-right: 5px">
          <table>
             <tr>
 
@@ -130,10 +122,21 @@
             </tr>
             <tr style="text-align:left;">
                 <th>
-                    <b>University of Calgary</b><br>Bachelor of Science, Software Engineering and Geophysics<br>
+                    <b>University of Calgary</b><br>Bachelor of Science (BSc) &#183 Software Engineering<br>
                 </th>
                 <th style="text-align:center">
-                    <b>Sept 2014 - Aug 2021</b><br></br>
+                    <b>Sept 2015 - Aug 2021</b><br></br>
+                </th>
+                <th>
+                    <img src="images/UOFCENG.png">
+                </th>
+            </tr>
+                <tr style="text-align:left;">
+                <th>
+                    <b>University of Calgary</b><br>Bachelor of Science (BSc) &#183 Geophysics and Earth Sciences<br>
+                </th>
+                <th style="text-align:center">
+                    <b>Sept 2014 - Aug 2020</b><br></br>
                 </th>
                 <th>
                     <img src="images/UOFC.png">
@@ -153,18 +156,6 @@
          </table>
     </div>
 
-    <table class="footTable">
-        <tr>
-          <td style="background-color:#fffff3;width:100%">
-            <nav>
-                <a href="https://github.com/s-cheema">
-                    <img src="images/gitHub.png">
-                </a>
-            </nav>
-          </td>
-        </tr>
-    </table>
-
     <script>
         var slideIndex = 0;
         showSlides();
@@ -182,7 +173,7 @@
             dots[i].className = dots[i].className.replace(" active", "");
           }
           slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
+         
           setTimeout(showSlides, 2000); // Change image every 2 seconds
         }
     </script>
