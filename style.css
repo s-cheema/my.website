@@ -29,6 +29,7 @@ body{
 	flex: 1;
 	text-align: left;
 	background-color:#5bccf6;
+	padding-left: 2%;
 }
 .nav-links ul li{
 	list-style: none;
@@ -272,4 +273,19 @@ img{
 
 .portfolioheader table td{
 	background-color: #fcde67;
+}
+
+.portfolioheaderh2{
+	padding-left: 5px;
+	padding-right: 50px;
+	padding-left: 300px;
+}
+
+.portfolioheaderh2 table{
+	width: 100%;
+	text-align: center;
+}
+
+.portfolioheaderh2 table td{
+	background-color: #9ACD32;
 }
