@@ -82,23 +82,6 @@ body{
 	min-height: 15vh
 }
 
-.textBox{
-  padding-left:30%;
-	display: flex;
-	color: #41FF00;
-	background-color: black;
-	align-items: center;
-	height: 200px;
-	border: 3px solid white;
-}
-.centeredText {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 table, th,td{
 	background:white;
 	border:1px solid black;
@@ -226,6 +209,7 @@ img{
 	transition: 0.5s;
 
 }
+
 .sidebar ul li:hover::after{
 	width: 60%;
 }
@@ -305,4 +289,21 @@ img{
 .portfoliotable table img{
 	width: 65%;
 	height: 25%;
+}
+
+.frontmessage{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.frontmessage table{
+	width: 100%;
+}
+
+.frontmessage table td{
+	background-color: #fffff3;
+	width: 50%;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
 }
