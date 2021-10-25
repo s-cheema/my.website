@@ -214,27 +214,18 @@ img{
 	width: 60%;
 }
 
+/*Prject Gallery*/
 .slideshow-projectgallery {
-	padding-left: 15%;
-	max-width: 80%;
   position: relative;
   margin: auto;
-}
-
-.slideshow-projectgallery img{
-	float: none;
-  width:  80%;
-  height: 60%;
-  object-fit: cover;
 }
 
 .slideshow-projectgallery .text{
   color: black;
   font-size: 15px;
-  padding: 8px 12px;
   position: absolute;
   bottom: 8px;
-  width: 85%;
+  padding-left: 40%;
   text-align: center;
   top: 100%;
 }
@@ -291,6 +282,7 @@ img{
 	height: 25%;
 }
 
+/*Front Message*/
 .frontmessage{
 	padding-left: 5px;
 	padding-right: 5px;
@@ -306,4 +298,22 @@ img{
 	text-align: center;
 	font-size: 24px;
 	font-weight: bold;
+}
+
+/*This is very important- Define a border for image*/
+.imageframe{
+	padding-right: 50px;
+	padding-left: 300px;
+	background-color: #fffff3;
+}
+
+.imageframe .text{
+	font-size: 1vw;
+	align-content: center;
+	padding-right: 40%;
+}
+
+.imageframe img{
+	align-content: center;
+	width: 50%;
 }
