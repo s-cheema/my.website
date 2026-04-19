@@ -1,320 +1,884 @@
-*{
-	margin: 0;
-	padding: 0;
-	font-family: 'Playfair Display', serif;
-	box-sizing: border-box;
+/* =========================================================
+   Design tokens — palette preserved exactly from original
+   ========================================================= */
+:root {
+	/* Palette (preserved) */
+	--color-bg: #FFFFF3;
+	--color-surface: #ffffff;
+	--color-nav: #5bccf6;
+	--color-accent-yellow: #fcde67;
+	--color-accent-green: #9ACD32;
+	--color-ink: #000000;
+	--color-slide-active: #717171;
+
+	/* Derived from palette — same hues, only alpha varies */
+	--color-nav-glass: rgba(91, 204, 246, 0.82);
+	--color-ink-soft: rgba(0, 0, 0, 0.72);
+	--color-ink-mute: rgba(0, 0, 0, 0.56);
+	--color-rule: rgba(0, 0, 0, 0.08);
+	--color-rule-strong: rgba(0, 0, 0, 0.14);
+
+	/* Type */
+	--font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+	--font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+	/* Spacing scale */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 3rem;
+	--space-8: 4rem;
+
+	/* Radius */
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 20px;
+	--radius-pill: 999px;
+
+	/* Shadows */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+	--shadow-md: 0 4px 10px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.05);
+	--shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+
+	/* Motion */
+	--ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+	--dur-fast: 160ms;
+	--dur-med: 260ms;
+	--dur-slow: 420ms;
+
+	/* Layout */
+	--nav-height: 112px;
+	--sidebar-width: 240px;
+	--container-pad: clamp(1rem, 3vw, 2.5rem);
+	--content-max: 1200px;
 }
 
+/* =========================================================
+   Reset + base
+   ========================================================= */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
 
-/*Top Panel*/
-h1{
-	background-color:white;
-	border-width: 6px;
-	border-bottom-style: double ;
+html {
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	font-family: var(--font-body);
+	font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+	line-height: 1.6;
+	color: var(--color-ink-soft);
+	background-color: var(--color-bg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-heading);
+	color: var(--color-ink);
+	line-height: 1.15;
+	letter-spacing: -0.01em;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	transition: color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+}
+
+a:focus-visible,
+button:focus-visible {
+	outline: 2px solid var(--color-nav);
+	outline-offset: 3px;
+	border-radius: var(--radius-sm);
+}
+
+/* =========================================================
+   Top panel — brand + nav
+   Original markup: .topPanel > brand div + <h1><nav>.nav-links</nav></h1>
+   Reset the <h1>'s block-level visual styling so it becomes
+   a semantic wrapper only.
+   ========================================================= */
+.topPanel {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background-color: var(--color-bg);
+	backdrop-filter: saturate(1.4) blur(8px);
+	-webkit-backdrop-filter: saturate(1.4) blur(8px);
+	box-shadow: var(--shadow-sm);
+	border-bottom: 1px solid var(--color-rule);
+}
+
+.topPanel > div:first-child {
+	margin: 0 !important;
+	padding: var(--space-4) var(--container-pad);
 }
 
 .topPanel a {
 	text-decoration: none;
-	color: black;
-	font-size: 42px;
-
-}
-
-/*Body*/
-body{
-	background-color:#FFFFF3;
-}
-
-.nav-links{
-	flex: 1;
-	text-align: left;
-	background-color:#5bccf6;
-	padding-left: 2%;
-}
-.nav-links ul li{
-	list-style: none;
+	color: var(--color-ink);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+	letter-spacing: -0.02em;
 	display: inline-block;
-	padding: 10px;
+	transition: opacity var(--dur-fast) var(--ease);
+}
+
+.topPanel > div:first-child a:hover {
+	opacity: 0.75;
+}
+
+/* The <h1> wrapping nav — strip legacy styling */
+.topPanel h1 {
+	background: none;
+	border: none;
+	font: inherit;
+	color: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-links {
+	background-color: var(--color-nav-glass);
+	padding: var(--space-3) var(--container-pad) !important;
+	text-align: left;
+}
+
+.nav-links ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	list-style: none;
+}
+
+.nav-links ul li {
+	display: inline-block;
+	padding: 0;
 	position: relative;
 }
-.nav-links ul li::after{
-	content: '';
-	width: 0%;
-	height: 2px;
-	background: #000000;
-	display: block;
-	margin: auto;
-	transition: 0.5s;
 
+.nav-links ul li::after {
+	content: '';
+	position: absolute;
+	left: var(--space-3);
+	right: var(--space-3);
+	bottom: 4px;
+	height: 2px;
+	background: var(--color-ink);
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform var(--dur-med) var(--ease);
 }
-.nav-links ul li:hover::after{
+
+.nav-links ul li:hover::after,
+.nav-links ul li:focus-within::after {
+	transform: scaleX(1);
+}
+
+.nav-links ul li a {
+	color: var(--color-surface);
+	text-decoration: none;
+	font-family: var(--font-body);
+	font-weight: 500;
+	font-size: 0.95rem;
+	letter-spacing: 0.01em;
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius-sm);
+	display: inline-block;
+	transition: background-color var(--dur-fast) var(--ease);
+}
+
+.nav-links ul li a:hover {
+	background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   Front hero (index.html)
+   ========================================================= */
+.frontmessage {
+	max-width: var(--content-max);
+	margin: var(--space-7) auto;
+	padding: 0 var(--container-pad);
+}
+
+.frontmessage table {
+	background: none;
+	border: none;
+	border-collapse: collapse;
 	width: 100%;
 }
 
-.nav-links ul li a{
-	color: #fff;
+.frontmessage td {
+	background: none !important;
+	border: none;
+	vertical-align: middle;
+	padding: var(--space-5);
+	text-align: center;
+}
+
+.frontmessage img {
+	display: block;
+	margin: 0 auto;
+	width: clamp(200px, 60%, 360px) !important;
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-lg);
+	background-color: var(--color-surface);
+	padding: var(--space-3);
+	transition: transform var(--dur-med) var(--ease);
+}
+
+.frontmessage img:hover {
+	transform: translateY(-2px);
+}
+
+.frontmessage .textBox {
+	font-family: var(--font-heading);
+	font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+	font-weight: 800;
+	color: var(--color-ink);
+	line-height: 1.15;
+	letter-spacing: -0.025em;
+}
+
+.frontmessage .textBox p {
+	font-weight: 800;
+	font-family: var(--font-heading);
+	color: var(--color-ink);
+}
+
+/* =========================================================
+   Content container shim
+   Many pages wrap sections in <div style="padding-left:5px;padding-right:5px">.
+   Give that pattern a comfortable width.
+   ========================================================= */
+body > div[style*="padding-left: 5px"],
+body > div[style*="padding-left:5px"] {
+	max-width: var(--content-max);
+	margin: var(--space-5) auto;
+	padding: 0 var(--container-pad) !important;
+}
+
+/* =========================================================
+   Tables — by default softer borders
+   ========================================================= */
+table {
+	border-collapse: collapse;
+	background: transparent;
+	width: 100%;
+}
+
+table, th, td {
+	background: transparent;
+	border: none;
+}
+
+/* Generic data tables (bookshelf, education, designs, data models) */
+body > div[style*="padding-left: 5px"] > table,
+body > div[style*="padding-left:5px"] > table,
+.bookTable table {
+	background: var(--color-surface);
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+}
+
+body > div[style*="padding-left: 5px"] > table th,
+body > div[style*="padding-left: 5px"] > table td,
+body > div[style*="padding-left:5px"] > table th,
+body > div[style*="padding-left:5px"] > table td,
+.bookTable th,
+.bookTable td {
+	padding: var(--space-3) var(--space-4);
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid var(--color-rule);
+	font-family: var(--font-body);
+	font-size: 0.95rem;
+	color: var(--color-ink-soft);
+}
+
+body > div[style*="padding-left: 5px"] > table tr:last-child td,
+body > div[style*="padding-left: 5px"] > table tr:last-child th,
+body > div[style*="padding-left:5px"] > table tr:last-child td,
+body > div[style*="padding-left:5px"] > table tr:last-child th,
+.bookTable tr:last-child td,
+.bookTable tr:last-child th {
+	border-bottom: none;
+}
+
+body > div[style*="padding-left: 5px"] > table th,
+body > div[style*="padding-left:5px"] > table th,
+.bookTable th {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	color: var(--color-ink);
+	font-size: 1rem;
+}
+
+/* Yellow banner row — turn into a rounded section heading */
+body table td[style*="background-color: #fcde67"],
+body table td[style*="background-color:#fcde67"] {
+	background-color: var(--color-accent-yellow) !important;
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+	color: var(--color-ink);
+	padding: var(--space-4) var(--space-5) !important;
+	letter-spacing: 0.01em;
+}
+
+body table td[style*="background-color: #fcde67"] b,
+body table td[style*="background-color:#fcde67"] b {
+	font-weight: 700;
+}
+
+/* Green banner (on project designs page) */
+body table td[style*="background-color: #9ACD32"],
+body table td[style*="background-color:#9ACD32"] {
+	background-color: var(--color-accent-green) !important;
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+	color: var(--color-ink);
+	padding: var(--space-4) var(--space-5) !important;
+}
+
+/* Education/certification thumbnails (last <th> column) */
+body > div[style*="padding-left: 5px"] > table th img,
+body > div[style*="padding-left:5px"] > table th img,
+.bookTable th img {
+	width: auto !important;
+	max-width: 80px !important;
+	max-height: 60px !important;
+	padding: 0;
+	margin: 0 auto;
+}
+
+/* =========================================================
+   Centered text heading blocks (Contact, Bookshelf)
+   ========================================================= */
+.centeredText {
+	max-width: var(--content-max);
+	margin: var(--space-7) auto var(--space-5);
+	padding: 0 var(--container-pad);
+}
+
+.centeredText h2 {
+	background: none !important;
+	font-family: var(--font-heading);
+	font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+	font-weight: 700;
+	text-align: center;
+	color: var(--color-ink);
+	letter-spacing: -0.02em;
+}
+
+.centeredText h2 u {
 	text-decoration: none;
-	font-size: 16px;
+	position: relative;
+	padding-bottom: var(--space-2);
 }
 
-
-/*Main - body*/
-.column{
-	flex: 50%;
-	padding: 25px;
-	border: 1px solid white;
-
-	
+.centeredText h2 u::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 48px;
+	height: 3px;
+	background-color: var(--color-accent-yellow);
+	border-radius: var(--radius-pill);
+	transform: translateX(-50%);
 }
 
-.column img{
+/* =========================================================
+   Contact page layout table
+   ========================================================= */
+.homeTable {
+	background: var(--color-surface);
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+}
+
+.homeTable tr td {
+	background: var(--color-surface) !important;
+	border: none;
+	padding: var(--space-6) !important;
+	vertical-align: top;
+}
+
+.homeTable p {
+	font-family: var(--font-body);
+	margin: var(--space-2) 0;
+}
+
+.homeTable b {
+	font-family: var(--font-heading);
+	font-size: 1.05rem;
+	color: var(--color-ink);
+	display: inline-block;
+	margin-top: var(--space-3);
+}
+
+.homeTable nav img {
+	margin: var(--space-3) 0 !important;
+	width: 100px !important;
+	height: auto !important;
+	transition: transform var(--dur-med) var(--ease);
+}
+
+.homeTable nav img:hover {
+	transform: translateY(-2px);
+}
+
+.homeTable td img[src*="portrait"] {
+	width: clamp(160px, 40%, 280px) !important;
+	margin: 0 auto !important;
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   Slideshow — shared across about & project pages
+   ========================================================= */
+.slideshow-container,
+.slideshow-projectgallery {
+	max-width: min(960px, 100%);
+	margin: var(--space-6) auto;
+	position: relative;
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	background: var(--color-surface);
+	box-shadow: var(--shadow-md);
+}
+
+.slideshow-container .mySlides,
+.slideshow-projectgallery .mySlides {
+	position: relative;
+}
+
+.slideshow-container img,
+.slideshow-projectgallery img {
+	width: 100% !important;
+	height: auto !important;
+	max-height: 60vh;
+	object-fit: cover;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
-}
-.row{
-	display: flex;
-
+	margin: 0;
+	padding: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 
-.placeHolder{
-	min-height: 15vh
+.slideshow-container .text,
+.slideshow-projectgallery .text {
+	color: var(--color-surface);
+	background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+	font-family: var(--font-body);
+	font-size: 0.95rem;
+	padding: var(--space-6) var(--space-4) var(--space-4);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: auto;
+	text-align: center;
+	letter-spacing: 0.02em;
 }
 
-table, th,td{
-	background:white;
-	border:1px solid black;
-}
-.bookTable img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding:5px;
-	width: 20%;
-}
-
-img{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	padding:5px;
-	width: 25%;
-}
-
-.mySlides {display: none;}
-
-/* Slideshow container */
-.slideshow-container{
-	max-width: 60%;
-	max-height: 40%;
-  position: relative;
-  margin: auto;
-}
-.slideshow-container img{
-	float: none;
-  width:  80%;
-  height: 60%;
-  object-fit: cover;
-}
-/* Caption text */
-.slideshow-container .text{
-  color: black;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-  top: 100%;
-}
-/* Number text (1/3 etc) */
-.slideshow-container .numbertext{
-  color: black;
-  padding-left: 11%;
-  font-size: 12px;
+.slideshow-container .numbertext,
+.slideshow-projectgallery .numbertext {
+	color: var(--color-surface);
+	font-family: var(--font-body);
+	font-size: 0.8rem;
+	padding: var(--space-3);
+	position: absolute;
+	top: var(--space-2);
+	left: var(--space-2);
+	background: rgba(0,0,0,0.45);
+	border-radius: var(--radius-pill);
+	z-index: 2;
 }
 
 .active {
-  background-color: #717171;
+	background-color: var(--color-slide-active);
 }
 
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+	from { opacity: 0.4; }
+	to   { opacity: 1; }
 }
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-/* Fading animation */
+
 .fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
 }
 
-/*footHeader*/
-.footTable{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-    color: white;
-    text-align: center;
-}
-
-.footTable nav{
-    position:center;
-    padding-top:0;
-    padding-bottom:0;
-}
-
-.footTable img{
-    width:5%;
-}
-
-.sidebar{
+/* =========================================================
+   Project page layout (sidebar + content)
+   Original used fixed 250px sidebar at top:155px.
+   Decouple via nav-height var + flex-friendly layout.
+   ========================================================= */
+.sidebar {
 	position: fixed;
-	top:  155px;
-	width: 250px;
-	height: 80%;
-	background-color: #5bccf6;
+	top: var(--nav-height);
+	left: 0;
+	width: var(--sidebar-width);
+	height: calc(100vh - var(--nav-height));
+	background-color: var(--color-nav);
+	padding: var(--space-5) 0;
+	box-shadow: var(--shadow-md);
+	overflow-y: auto;
+	z-index: 5;
 }
 
-.sidebar .sidebarlink{
-
+.sidebar .sidebarlink {
 	text-align: center;
 }
 
-.sidebar ul li a{
-	color: #fff;
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar ul li {
+	padding: var(--space-3) 0;
+	position: relative;
+}
+
+.sidebar ul li a {
+	color: var(--color-surface);
 	text-decoration: none;
-	font-size: 16px;
+	font-family: var(--font-body);
+	font-weight: 500;
+	font-size: 0.95rem;
+	display: inline-block;
+	padding: var(--space-2) var(--space-4);
+	border-radius: var(--radius-sm);
+	transition: background-color var(--dur-fast) var(--ease);
 }
 
-.sidebar ul li{
-	padding-top: 25px;
+.sidebar ul li a:hover {
+	background-color: rgba(255, 255, 255, 0.14);
 }
 
-.sidebar ul li::after{
+.sidebar ul li::after {
 	content: '';
-	width: 0%;
+	position: absolute;
+	left: 50%;
+	bottom: 2px;
+	width: 0;
 	height: 2px;
-	background: #fcde67;
-	display: block;
-	margin: auto;
-	transition: 0.5s;
-
+	background: var(--color-accent-yellow);
+	transition: width var(--dur-med) var(--ease);
+	transform: translateX(-50%);
 }
 
-.sidebar ul li:hover::after{
-	width: 60%;
+.sidebar ul li:hover::after {
+	width: 36%;
 }
 
-/*Prject Gallery*/
-.slideshow-projectgallery {
-  position: relative;
-  margin: auto;
+/* Project page content wrappers (had padding-left: 300px in original) */
+.portfolioheader,
+.portfolioheaderh2,
+.portfoliotable,
+.imageframe,
+body > div[style*="padding-left: 300px"],
+body > div[style*="padding-left:300px"] {
+	padding-left: calc(var(--sidebar-width) + var(--space-6)) !important;
+	padding-right: var(--container-pad) !important;
+	max-width: none;
+	margin: var(--space-5) 0;
 }
 
-.slideshow-projectgallery .text{
-  color: black;
-  font-size: 15px;
-  position: absolute;
-  bottom: 8px;
-  padding-left: 40%;
-  text-align: center;
-  top: 100%;
-}
-
-.slideshow-projectgallery .numbertext{
-  font-size: 12px;
-  color: black; 
-  padding-left: 12%;
-}
-
-.portfolioheader{
-	padding-left: 5px;
-	padding-right: 50px;
-	padding-left: 300px;
-}
-
-.portfolioheader table{
+.portfolioheader table,
+.portfolioheaderh2 table,
+.portfoliotable table,
+body > div[style*="padding-left: 300px"] > table,
+body > div[style*="padding-left:300px"] > table {
 	width: 100%;
+	background: var(--color-surface);
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+}
+
+.portfolioheader table td,
+body > div[style*="padding-left: 300px"] > table td,
+body > div[style*="padding-left:300px"] > table td {
+	padding: var(--space-4) var(--space-5);
 	text-align: center;
+	border: none;
+	background-color: var(--color-accent-yellow);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+	color: var(--color-ink);
 }
 
-.portfolioheader table td{
-	background-color: #fcde67;
+.portfolioheaderh2 table td {
+	padding: var(--space-4) var(--space-5);
+	text-align: center;
+	border: none;
+	background-color: var(--color-accent-green);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+	color: var(--color-ink);
 }
 
-.portfolioheaderh2{
-	padding-left: 5px;
-	padding-right: 50px;
-	padding-left: 300px;
+.portfoliotable table th,
+.portfoliotable table td {
+	padding: var(--space-4) var(--space-5);
+	border-bottom: 1px solid var(--color-rule);
+	font-family: var(--font-body);
+	text-align: left;
+	vertical-align: middle;
 }
 
-.portfolioheaderh2 table{
+.portfoliotable table th {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	color: var(--color-ink);
+}
+
+.portfoliotable table img {
+	width: 100% !important;
+	max-width: 260px;
+	height: auto !important;
+	border-radius: var(--radius-sm);
+	margin: 0;
+	padding: 0;
+	box-shadow: var(--shadow-sm);
+}
+
+.portfoliotable a {
+	color: var(--color-ink);
+	text-decoration: underline;
+	text-decoration-color: var(--color-accent-yellow);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 3px;
+	transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+
+.portfoliotable a:hover {
+	text-decoration-color: var(--color-nav);
+}
+
+button {
+	display: inline-block;
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--color-ink);
+	background-color: var(--color-accent-yellow);
+	border: none;
+	border-radius: var(--radius-pill);
+	padding: var(--space-3) var(--space-5);
+	cursor: pointer;
+	box-shadow: var(--shadow-sm);
+	transition: transform var(--dur-fast) var(--ease),
+		box-shadow var(--dur-fast) var(--ease),
+		background-color var(--dur-fast) var(--ease);
+}
+
+button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-md);
+}
+
+button:active {
+	transform: translateY(0);
+}
+
+.imageframe {
+	background: transparent;
+}
+
+.imageframe .text {
+	font-family: var(--font-body);
+	font-size: 0.95rem;
+	padding: var(--space-3) 0 0;
+	text-align: center;
+	color: var(--color-ink-soft);
+}
+
+.imageframe img {
+	width: 100% !important;
+	max-width: 760px;
+	height: auto !important;
+	margin: 0 auto;
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+}
+
+/* =========================================================
+   Global misc
+   ========================================================= */
+.placeHolder {
+	min-height: 12vh;
+}
+
+/* Footer (if used) */
+.footTable {
+	position: fixed;
+	left: 0;
+	bottom: 0;
 	width: 100%;
+	background-color: var(--color-surface);
+	color: var(--color-ink);
 	text-align: center;
+	box-shadow: 0 -2px 10px rgba(0,0,0,0.04);
 }
 
-.portfolioheaderh2 table td{
-	background-color: #9ACD32;
+.footTable img {
+	width: auto !important;
+	max-width: 40px;
 }
 
-.portfoliotable{
-	padding-left: 5px;
-	padding-right: 50px;
-	padding-left: 300px;
+/* Tame old inline-style spacers */
+body > br { display: none; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1024px) {
+	:root {
+		--sidebar-width: 200px;
+	}
 }
 
-.portfoliotable table{
-	width: 100%;
-	text-align: center;
+@media (max-width: 900px) {
+	.sidebar {
+		position: static;
+		width: 100%;
+		height: auto;
+		padding: var(--space-2) var(--container-pad);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.sidebar ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--space-1);
+	}
+
+	.sidebar ul li {
+		padding: var(--space-1) 0;
+	}
+
+	.portfolioheader,
+	.portfolioheaderh2,
+	.portfoliotable,
+	.imageframe,
+	body > div[style*="padding-left: 300px"],
+	body > div[style*="padding-left:300px"] {
+		padding-left: var(--container-pad) !important;
+		padding-right: var(--container-pad) !important;
+	}
 }
 
-.portfoliotable table img{
-	width: 65%;
-	height: 25%;
+@media (max-width: 720px) {
+	.topPanel > div:first-child {
+		padding: var(--space-3) var(--container-pad);
+	}
+
+	.nav-links {
+		padding: var(--space-2) var(--container-pad) !important;
+	}
+
+	.nav-links ul {
+		justify-content: center;
+		gap: var(--space-1);
+	}
+
+	.nav-links ul li a {
+		padding: var(--space-2);
+		font-size: 0.85rem;
+	}
+
+	.frontmessage table,
+	.frontmessage tr {
+		display: block;
+	}
+
+	.frontmessage td {
+		display: block !important;
+		width: 100% !important;
+		padding: var(--space-3) 0 !important;
+	}
+
+	.frontmessage .textBox,
+	.frontmessage .textBox p {
+		font-size: clamp(1.1rem, 0.8rem + 1.5vw, 1.35rem);
+		word-break: break-word;
+		padding: 0 var(--space-2);
+	}
+
+	.homeTable tr,
+	.homeTable tbody {
+		display: block;
+	}
+
+	.homeTable td {
+		display: block !important;
+		width: 100% !important;
+	}
+
+	.portfoliotable table,
+	.portfoliotable table tbody,
+	.portfoliotable table tr {
+		display: block;
+	}
+
+	.portfoliotable table td,
+	.portfoliotable table th {
+		display: block;
+		width: 100%;
+		border-bottom: 1px solid var(--color-rule);
+	}
 }
 
-/*Front Message*/
-.frontmessage{
-	padding-left: 5px;
-	padding-right: 5px;
-}
+/* =========================================================
+   Accessibility
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 
-.frontmessage table{
-	width: 100%;
-}
-
-.frontmessage table td{
-	background-color: #fffff3;
-	width: 50%;
-	text-align: center;
-	font-size: 24px;
-	font-weight: bold;
-}
-
-/*This is very important- Define a border for image*/
-.imageframe{
-	padding-right: 50px;
-	padding-left: 300px;
-	background-color: #fffff3;
-}
-
-.imageframe .text{
-	font-size: 1vw;
-	align-content: center;
-	padding-right: 40%;
-}
-
-.imageframe img{
-	align-content: center;
-	width: 60%;
-	height: 40%;
+	.fade {
+		animation: none !important;
+	}
 }
